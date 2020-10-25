@@ -123,7 +123,7 @@ namespace WebApi.Services
             }
 
             // map model to new account object
-            var account = _mapper.Map<Account>(model);
+            var account = _mapper.Map<Tbl_User>(model);
 
             // first registered account is an admin
             var isFirstAccount = _context.Accounts.Count() == 0;
@@ -221,7 +221,7 @@ namespace WebApi.Services
                 throw new AppException($"Email '{model.Email}' is already registered");
 
             // map model to new account object
-            var account = _mapper.Map<Account>(model);
+            var account = _mapper.Map<Tbl_User>(model);
             account.Created = DateTime.UtcNow;
             account.Verified = DateTime.UtcNow;
 
@@ -265,14 +265,14 @@ namespace WebApi.Services
 
         // helper methods
 
-        private Account getAccount(int id)
+        private Tbl_User getAccount(int id)
         {
             var account = _context.Accounts.Find(id);
             if (account == null) throw new KeyNotFoundException("Account not found");
             return account;
         }
 
-        private (RefreshToken, Account) getRefreshToken(string token)
+        private (RefreshToken, Tbl_User) getRefreshToken(string token)
         {
             var account = _context.Accounts.SingleOrDefault(u => u.RefreshTokens.Any(t => t.Token == token));
             if (account == null) throw new AppException("Invalid token");
@@ -281,7 +281,7 @@ namespace WebApi.Services
             return (refreshToken, account);
         }
 
-        private string generateJwtToken(Account account)
+        private string generateJwtToken(Tbl_User account)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -306,7 +306,7 @@ namespace WebApi.Services
             };
         }
 
-        private void removeOldRefreshTokens(Account account)
+        private void removeOldRefreshTokens(Tbl_User account)
         {
             account.RefreshTokens.RemoveAll(x => 
                 !x.IsActive && 
@@ -322,7 +322,7 @@ namespace WebApi.Services
             return BitConverter.ToString(randomBytes).Replace("-", "");
         }
 
-        private void sendVerificationEmail(Account account, string origin)
+        private void sendVerificationEmail(Tbl_User account, string origin)
         {
             string message;
             if (!string.IsNullOrEmpty(origin))
@@ -363,7 +363,7 @@ namespace WebApi.Services
             );
         }
 
-        private void sendPasswordResetEmail(Account account, string origin)
+        private void sendPasswordResetEmail(Tbl_User account, string origin)
         {
             string message;
             if (!string.IsNullOrEmpty(origin))

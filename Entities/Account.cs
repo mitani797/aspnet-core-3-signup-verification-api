@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WebApi.Entities
 {
-    public class Account
+    public class Tbl_User
     {
         public int Id { get; set; }
         public string Title { get; set; }
