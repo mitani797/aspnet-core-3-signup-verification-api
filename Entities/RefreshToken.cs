@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 namespace WebApi.Entities
 {
     [Owned]
-    public class RefreshToken
+    public class Tbl_RefreshToken
     {
         [Key]
         public int Id { get; set; }
-        public Tbl_User Account { get; set; }
+        public Tbl_Users User { get; set; }
         public string Token { get; set; }
         public DateTime Expires { get; set; }
         public bool IsExpired => DateTime.UtcNow >= Expires;
@@ -18,6 +18,7 @@ namespace WebApi.Entities
         public DateTime? Revoked { get; set; }
         public string RevokedByIp { get; set; }
         public string ReplacedByToken { get; set; }
+        public int UserId { get; set; }
         public bool IsActive => Revoked == null && !IsExpired;
     }
 }

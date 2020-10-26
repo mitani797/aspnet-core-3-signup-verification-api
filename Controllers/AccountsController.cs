@@ -24,6 +24,12 @@ namespace WebApi.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("sayhi")]
+        public string SayHi()
+        {
+           return "HI";
+        }
+
         [HttpPost("authenticate")]
         public ActionResult<AuthenticateResponse> Authenticate(AuthenticateRequest model)
         {

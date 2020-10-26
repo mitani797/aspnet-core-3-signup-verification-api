@@ -18,7 +18,7 @@ namespace WebApi.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.5");
 
-            modelBuilder.Entity("WebApi.Entities.Account", b =>
+            modelBuilder.Entity("WebApi.Entities.Tbl_Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,10 +68,10 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Tbl_Users");
                 });
 
-            modelBuilder.Entity("WebApi.Entities.Account", b =>
+            modelBuilder.Entity("WebApi.Entities.Tbl_Users", b =>
                 {
                     b.OwnsMany("WebApi.Entities.RefreshToken", "RefreshTokens", b1 =>
                         {
@@ -79,7 +79,7 @@ namespace WebApi.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("INTEGER");
 
-                            b1.Property<int>("AccountId")
+                            b1.Property<int>("UserId")
                                 .HasColumnType("INTEGER");
 
                             b1.Property<DateTime>("Created")
@@ -105,12 +105,12 @@ namespace WebApi.Migrations
 
                             b1.HasKey("Id");
 
-                            b1.HasIndex("AccountId");
+                            b1.HasIndex("UserId");
 
                             b1.ToTable("RefreshToken");
 
-                            b1.WithOwner("Account")
-                                .HasForeignKey("AccountId");
+                            b1.WithOwner("Tbl_Users")
+                                .HasForeignKey("UserId");
                         });
                 });
 #pragma warning restore 612, 618

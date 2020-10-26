@@ -9,15 +9,15 @@ namespace WebApi.Helpers
         // mappings between model and entity objects
         public AutoMapperProfile()
         {
-            CreateMap<Tbl_User, AccountResponse>();
+            CreateMap<Tbl_Users, AccountResponse>();
 
-            CreateMap<Tbl_User, AuthenticateResponse>();
+            CreateMap<Tbl_Users, AuthenticateResponse>();
 
-            CreateMap<RegisterRequest, Tbl_User>();
+            CreateMap<RegisterRequest, Tbl_Users>();
 
-            CreateMap<CreateRequest, Tbl_User>();
+            CreateMap<CreateRequest, Tbl_Users>();
 
-            CreateMap<UpdateRequest, Tbl_User>()
+            CreateMap<UpdateRequest, Tbl_Users>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {

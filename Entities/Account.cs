@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApi.Entities
 {
-    public class Tbl_User
+    public class Tbl_Users
     {
+        [Key]
         public int Id { get; set; }
         public string Title { get; set; }
         public string FirstName { get; set; }
@@ -21,7 +23,7 @@ namespace WebApi.Entities
         public DateTime? PasswordReset { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
-        public List<RefreshToken> RefreshTokens { get; set; }
+        public List<Tbl_RefreshToken> RefreshTokens { get; set; }
 
         public bool OwnsToken(string token) 
         {
